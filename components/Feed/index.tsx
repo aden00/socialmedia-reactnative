@@ -7,6 +7,7 @@ import { View } from "../Themed";
 import { API, graphqlOperation } from "aws-amplify";
 import { getTweet, getUser, listTweets } from "../../src/graphql/queries";
 import { CreateUserInput } from "../../src/API";
+import UserFleetList from "../UserFleetList";
 const Feed = () => {
   const [tweets, setTweets] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -43,6 +44,7 @@ const Feed = () => {
         onRefresh={fetchAllTweets}
         onEndReached={fetchAllTweets}
         onEndReachedThreshold={0.7}
+        ListHeaderComponent={UserFleetList}
       />
     </View>
   );
