@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "twitterclone",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "S3DeploymentBucket": "amplify-twitterclone-dev-210544-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/ef77012f3f60da2300094a46d24dd064dc751062"
+}
