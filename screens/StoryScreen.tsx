@@ -4,7 +4,7 @@ import usersWithFleets from "../assets/TwitterAssets/data/usersWithFleets";
 import StoryView from "../components/StoryView";
 const StoryScreen = () => {
   const user = usersWithFleets[0];
-  const story = usersWithFleets[0].fleets.items[1];
+  const story = usersWithFleets[0].fleets.items[0];
   return <StoryView user={user} story={story} />;
 };
 

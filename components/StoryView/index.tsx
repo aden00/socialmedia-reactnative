@@ -2,6 +2,8 @@ import { Image, MaskedViewIOS, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { StoryType, UserType } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
+import ProfilePicture from "../ProfilePicture";
+import StoryHeader from "../StoryHeader";
 export type StoryViewProps = {
   user: UserType;
   story: StoryType;
@@ -15,6 +17,7 @@ const StoryView = (props: StoryViewProps) => {
       ) : (
         <Text style={styles.text}>{story.text}</Text>
       )}
+      <StoryHeader user={user} />
     </View>
     // <LinearGradient
     //   colors={["#a1c4fd", "#c2e9fb"]}
