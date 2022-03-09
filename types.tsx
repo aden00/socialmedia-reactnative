@@ -21,6 +21,7 @@ export type RootStackParamList = {
   Modal: undefined;
   NotFound: undefined;
   NewTweet: undefined;
+  Story: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -59,4 +60,13 @@ export type TweetType = {
   numberOfComments: number;
   numberOfRetweets: number;
   numberOfLikes: number;
+};
+
+export type StoryType = {
+  id: string;
+  createdAt: string;
+  user: UserType;
+  type: string;
+  text?: string;
+  image?: string;
 };

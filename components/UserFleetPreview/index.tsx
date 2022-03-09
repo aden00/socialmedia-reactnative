@@ -1,24 +1,32 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { UserType } from "../../types";
 import ProfilePicture from "../ProfilePicture";
 import Colors from "../../constants/Colors";
+import { useNavigation } from "@react-navigation/native";
 
 export type UserFleetPreviewProps = {
   user: UserType;
 };
 
 const UserFleetPreview = (props: UserFleetPreviewProps) => {
+  const navigation = useNavigation();
+
   const {
     user: { username, image },
   } = props;
+  const onPress = () => {
+    navigation.navigate("Story");
+  };
   return (
-    <View style={styles.container}>
-      <View style={styles.image}>
-        <ProfilePicture image={image} size={60} />
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.container}>
+        <View style={styles.image}>
+          <ProfilePicture image={image} size={60} />
+        </View>
+        <Text style={styles.username}>{username}</Text>
       </View>
-      <Text style={styles.username}>{username}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
