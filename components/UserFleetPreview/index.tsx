@@ -16,6 +16,8 @@ const UserFleetPreview = (props: UserFleetPreviewProps) => {
     user: { username, id, image },
   } = props;
   const onPress = () => {
+    console.log(id);
+
     navigation.navigate("Story", { userId: id });
   };
   return (

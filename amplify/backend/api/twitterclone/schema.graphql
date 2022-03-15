@@ -11,6 +11,7 @@ type User @model {
   image: String
   tweets: [Tweet] @hasMany
   likes: [Like] @hasMany
+  stories: [Story] @hasMany
 }
 
 type Tweet @model {
@@ -25,6 +26,13 @@ type Like @model {
   id: ID!
   user: User! @belongsTo
   tweet: Tweet! @belongsTo
+}
+type Story @model {
+  id: ID!
+  type: String!
+  text: String
+  image: String
+  user: User @belongsTo
 }
 # type Like
 #   @model(queries: null)

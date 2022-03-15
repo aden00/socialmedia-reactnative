@@ -7,6 +7,7 @@ type User {
   image: String
   tweets(filter: ModelTweetFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelTweetConnection
   likes(filter: ModelLikeFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelLikeConnection
+  stories(filter: ModelStoryFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelStoryConnection
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -31,6 +32,17 @@ type Like {
   updatedAt: AWSDateTime!
   userLikesId: ID
   tweetLikesId: ID
+}
+
+type Story {
+  id: ID!
+  type: String!
+  text: String
+  image: String
+  user: User
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  userStoriesId: ID
 }
 
 input ModelStringInput {
@@ -147,6 +159,8 @@ type Query {
   listTweets(filter: ModelTweetFilterInput, limit: Int, nextToken: String): ModelTweetConnection
   getLike(id: ID!): Like
   listLikes(filter: ModelLikeFilterInput, limit: Int, nextToken: String): ModelLikeConnection
+  getStory(id: ID!): Story
+  listStories(filter: ModelStoryFilterInput, limit: Int, nextToken: String): ModelStoryConnection
 }
 
 input ModelUserConditionInput {
@@ -189,6 +203,9 @@ type Mutation {
   createLike(input: CreateLikeInput!, condition: ModelLikeConditionInput): Like
   updateLike(input: UpdateLikeInput!, condition: ModelLikeConditionInput): Like
   deleteLike(input: DeleteLikeInput!, condition: ModelLikeConditionInput): Like
+  createStory(input: CreateStoryInput!, condition: ModelStoryConditionInput): Story
+  updateStory(input: UpdateStoryInput!, condition: ModelStoryConditionInput): Story
+  deleteStory(input: DeleteStoryInput!, condition: ModelStoryConditionInput): Story
 }
 
 type Subscription {
@@ -201,6 +218,9 @@ type Subscription {
   onCreateLike: Like @aws_subscribe(mutations: ["createLike"])
   onUpdateLike: Like @aws_subscribe(mutations: ["updateLike"])
   onDeleteLike: Like @aws_subscribe(mutations: ["deleteLike"])
+  onCreateStory: Story @aws_subscribe(mutations: ["createStory"])
+  onUpdateStory: Story @aws_subscribe(mutations: ["updateStory"])
+  onDeleteStory: Story @aws_subscribe(mutations: ["deleteStory"])
 }
 
 type ModelTweetConnection {
@@ -284,6 +304,52 @@ input UpdateLikeInput {
 }
 
 input DeleteLikeInput {
+  id: ID!
+}
+
+type ModelStoryConnection {
+  items: [Story]!
+  nextToken: String
+}
+
+input ModelStoryFilterInput {
+  id: ModelIDInput
+  type: ModelStringInput
+  text: ModelStringInput
+  image: ModelStringInput
+  and: [ModelStoryFilterInput]
+  or: [ModelStoryFilterInput]
+  not: ModelStoryFilterInput
+  userStoriesId: ModelIDInput
+}
+
+input ModelStoryConditionInput {
+  type: ModelStringInput
+  text: ModelStringInput
+  image: ModelStringInput
+  and: [ModelStoryConditionInput]
+  or: [ModelStoryConditionInput]
+  not: ModelStoryConditionInput
+  userStoriesId: ModelIDInput
+}
+
+input CreateStoryInput {
+  id: ID
+  type: String!
+  text: String
+  image: String
+  userStoriesId: ID
+}
+
+input UpdateStoryInput {
+  id: ID!
+  type: String
+  text: String
+  image: String
+  userStoriesId: ID
+}
+
+input DeleteStoryInput {
   id: ID!
 }
 

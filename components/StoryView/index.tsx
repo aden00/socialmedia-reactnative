@@ -22,20 +22,23 @@ export type StoryViewProps = {
 const StoryView = (props: StoryViewProps) => {
   const { user, story, goToNextFleet, goToPrevFleet } = props;
   console.log(story);
-  const renderElement = () => {
-    if (!!story.image) {
-      return <Image source={{ uri: story.image }} style={styles.image} />;
-    }
-    return <Text style={styles.text}>{story.text}</Text>;
-  };
+  // const renderElement = () => {
+  //   if (!!story.image) {
+  //     return <Image source={{ uri: story.image }} style={styles.image} />;
+  //   }
+  //   return <Text style={styles.text}>{story.text}</Text>;
+  // };
   return (
     <View style={styles.container}>
-      {renderElement()}
-      {/* {!!story.image ? (
+      {/* {renderElement()} */}
+      {/* {story.type == "IMAGE" && (
         <Image source={{ uri: story.image }} style={styles.image} />
-      ) : (
-        <Text style={styles.text}>{story.text}</Text>
-      )} */}
+      )}
+      {story.type == "TEXT" && <Text style={styles.text}>{story.text}</Text>} */}
+      {story.image && (
+        <Image source={{ uri: story.image }} style={styles.image} />
+      )}
+      <Text style={styles.text}>{story.text}</Text>
       <StoryHeader user={user} story={story} />
       <View style={styles.btnContainer}>
         <TouchableOpacity

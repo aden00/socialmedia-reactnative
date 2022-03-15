@@ -35,6 +35,18 @@ export const createUser = /* GraphQL */ `
         }
         nextToken
       }
+      stories {
+        items {
+          id
+          type
+          text
+          image
+          createdAt
+          updatedAt
+          userStoriesId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -70,6 +82,18 @@ export const updateUser = /* GraphQL */ `
           updatedAt
           userLikesId
           tweetLikesId
+        }
+        nextToken
+      }
+      stories {
+        items {
+          id
+          type
+          text
+          image
+          createdAt
+          updatedAt
+          userStoriesId
         }
         nextToken
       }
@@ -111,6 +135,18 @@ export const deleteUser = /* GraphQL */ `
         }
         nextToken
       }
+      stories {
+        items {
+          id
+          type
+          text
+          image
+          createdAt
+          updatedAt
+          userStoriesId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -136,6 +172,9 @@ export const createTweet = /* GraphQL */ `
           nextToken
         }
         likes {
+          nextToken
+        }
+        stories {
           nextToken
         }
         createdAt
@@ -179,6 +218,9 @@ export const updateTweet = /* GraphQL */ `
         likes {
           nextToken
         }
+        stories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -220,6 +262,9 @@ export const deleteTweet = /* GraphQL */ `
         likes {
           nextToken
         }
+        stories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -256,6 +301,9 @@ export const createLike = /* GraphQL */ `
           nextToken
         }
         likes {
+          nextToken
+        }
+        stories {
           nextToken
         }
         createdAt
@@ -308,6 +356,9 @@ export const updateLike = /* GraphQL */ `
         likes {
           nextToken
         }
+        stories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -358,6 +409,9 @@ export const deleteLike = /* GraphQL */ `
         likes {
           nextToken
         }
+        stories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -386,6 +440,108 @@ export const deleteLike = /* GraphQL */ `
       updatedAt
       userLikesId
       tweetLikesId
+    }
+  }
+`;
+export const createStory = /* GraphQL */ `
+  mutation CreateStory(
+    $input: CreateStoryInput!
+    $condition: ModelStoryConditionInput
+  ) {
+    createStory(input: $input, condition: $condition) {
+      id
+      type
+      text
+      image
+      user {
+        id
+        username
+        name
+        email
+        image
+        tweets {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        stories {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      userStoriesId
+    }
+  }
+`;
+export const updateStory = /* GraphQL */ `
+  mutation UpdateStory(
+    $input: UpdateStoryInput!
+    $condition: ModelStoryConditionInput
+  ) {
+    updateStory(input: $input, condition: $condition) {
+      id
+      type
+      text
+      image
+      user {
+        id
+        username
+        name
+        email
+        image
+        tweets {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        stories {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      userStoriesId
+    }
+  }
+`;
+export const deleteStory = /* GraphQL */ `
+  mutation DeleteStory(
+    $input: DeleteStoryInput!
+    $condition: ModelStoryConditionInput
+  ) {
+    deleteStory(input: $input, condition: $condition) {
+      id
+      type
+      text
+      image
+      user {
+        id
+        username
+        name
+        email
+        image
+        tweets {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        stories {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      userStoriesId
     }
   }
 `;

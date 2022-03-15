@@ -249,6 +249,89 @@
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
+    "StoryUserDataResolverFnStoryUserDataResolverFnAppSyncFunctionB1B14273": {
+      "Type": "AWS::AppSync::FunctionConfiguration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+        },
+        "DataSourceName": {
+          "Ref": "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserUserDataSourceA8C4C398Name"
+        },
+        "FunctionVersion": "2018-05-29",
+        "Name": "StoryUserDataResolverFn",
+        "RequestMappingTemplateS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
+              },
+              "/",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
+              },
+              "/resolvers/Story.user.req.vtl"
+            ]
+          ]
+        },
+        "ResponseMappingTemplateS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
+              },
+              "/",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
+              },
+              "/resolvers/Story.user.res.vtl"
+            ]
+          ]
+        }
+      }
+    },
+    "StoryuserResolver": {
+      "Type": "AWS::AppSync::Resolver",
+      "Properties": {
+        "ApiId": {
+          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+        },
+        "FieldName": "user",
+        "TypeName": "Story",
+        "Kind": "PIPELINE",
+        "PipelineConfig": {
+          "Functions": [
+            {
+              "Fn::GetAtt": [
+                "StoryUserDataResolverFnStoryUserDataResolverFnAppSyncFunctionB1B14273",
+                "FunctionId"
+              ]
+            }
+          ]
+        },
+        "RequestMappingTemplate": {
+          "Fn::Join": [
+            "",
+            [
+              "$util.qr($ctx.stash.put(\"typeName\", \"Story\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"user\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              {
+                "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+              },
+              "\"))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+              {
+                "Ref": "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserUserTableA7A02430Ref"
+              },
+              "\"))\n$util.toJson({})"
+            ]
+          ]
+        },
+        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+      }
+    },
     "UserTweetsDataResolverFnUserTweetsDataResolverFnAppSyncFunction4844D842": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
@@ -415,6 +498,89 @@
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
+    "UserStoriesDataResolverFnUserStoriesDataResolverFnAppSyncFunction85775CBA": {
+      "Type": "AWS::AppSync::FunctionConfiguration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+        },
+        "DataSourceName": {
+          "Ref": "referencetotransformerrootstackStoryNestedStackStoryNestedStackResource5773F9BFOutputstransformerrootstackStoryStoryDataSource6027B430Name"
+        },
+        "FunctionVersion": "2018-05-29",
+        "Name": "UserStoriesDataResolverFn",
+        "RequestMappingTemplateS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
+              },
+              "/",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
+              },
+              "/resolvers/User.stories.req.vtl"
+            ]
+          ]
+        },
+        "ResponseMappingTemplateS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
+              },
+              "/",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
+              },
+              "/resolvers/User.stories.res.vtl"
+            ]
+          ]
+        }
+      }
+    },
+    "UserstoriesResolver": {
+      "Type": "AWS::AppSync::Resolver",
+      "Properties": {
+        "ApiId": {
+          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+        },
+        "FieldName": "stories",
+        "TypeName": "User",
+        "Kind": "PIPELINE",
+        "PipelineConfig": {
+          "Functions": [
+            {
+              "Fn::GetAtt": [
+                "UserStoriesDataResolverFnUserStoriesDataResolverFnAppSyncFunction85775CBA",
+                "FunctionId"
+              ]
+            }
+          ]
+        },
+        "RequestMappingTemplate": {
+          "Fn::Join": [
+            "",
+            [
+              "$util.qr($ctx.stash.put(\"typeName\", \"User\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"stories\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              {
+                "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+              },
+              "\"))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+              {
+                "Ref": "referencetotransformerrootstackStoryNestedStackStoryNestedStackResource5773F9BFOutputstransformerrootstackStoryStoryTable9C86A981Ref"
+              },
+              "\"))\n$util.toJson({})"
+            ]
+          ]
+        },
+        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+      }
+    },
     "TweetLikesDataResolverFnTweetLikesDataResolverFnAppSyncFunction5704A8CE": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
@@ -525,6 +691,12 @@
       "Type": "String"
     },
     "referencetotransformerrootstackLikeNestedStackLikeNestedStackResourceB91A8DAFOutputstransformerrootstackLikeLikeTable286B4242Ref": {
+      "Type": "String"
+    },
+    "referencetotransformerrootstackStoryNestedStackStoryNestedStackResource5773F9BFOutputstransformerrootstackStoryStoryDataSource6027B430Name": {
+      "Type": "String"
+    },
+    "referencetotransformerrootstackStoryNestedStackStoryNestedStackResource5773F9BFOutputstransformerrootstackStoryStoryTable9C86A981Ref": {
       "Type": "String"
     }
   }

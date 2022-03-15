@@ -32,6 +32,18 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
+      stories {
+        items {
+          id
+          type
+          text
+          image
+          createdAt
+          updatedAt
+          userStoriesId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -54,6 +66,9 @@ export const listUsers = /* GraphQL */ `
           nextToken
         }
         likes {
+          nextToken
+        }
+        stories {
           nextToken
         }
         createdAt
@@ -80,6 +95,9 @@ export const getTweet = /* GraphQL */ `
           nextToken
         }
         likes {
+          nextToken
+        }
+        stories {
           nextToken
         }
         createdAt
@@ -126,16 +144,9 @@ export const listTweets = /* GraphQL */ `
           nextToken
           items {
             id
-            user {
-              id
-              username
-            }
-            tweet {
-              id
-            }
+            createdAt
+            updatedAt
             userLikesId
-
-            tweetLikesId
           }
         }
         createdAt
@@ -160,6 +171,9 @@ export const getLike = /* GraphQL */ `
           nextToken
         }
         likes {
+          nextToken
+        }
+        stories {
           nextToken
         }
         createdAt
@@ -224,6 +238,66 @@ export const listLikes = /* GraphQL */ `
         updatedAt
         userLikesId
         tweetLikesId
+      }
+      nextToken
+    }
+  }
+`;
+export const getStory = /* GraphQL */ `
+  query GetStory($id: ID!) {
+    getStory(id: $id) {
+      id
+      type
+      text
+      image
+      user {
+        id
+        username
+        name
+        email
+        image
+        tweets {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        stories {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      userStoriesId
+    }
+  }
+`;
+export const listStories = /* GraphQL */ `
+  query ListStories(
+    $filter: ModelStoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listStories(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        type
+        text
+        image
+        user {
+          id
+          username
+          name
+          email
+          image
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+        userStoriesId
       }
       nextToken
     }

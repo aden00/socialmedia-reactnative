@@ -69,6 +69,7 @@ export type User = {
   image?: string | null,
   tweets?: ModelTweetConnection | null,
   likes?: ModelLikeConnection | null,
+  stories?: ModelStoryConnection | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -107,6 +108,24 @@ export type Like = {
   updatedAt: string,
   userLikesId?: string | null,
   tweetLikesId?: string | null,
+};
+
+export type ModelStoryConnection = {
+  __typename: "ModelStoryConnection",
+  items:  Array<Story | null >,
+  nextToken?: string | null,
+};
+
+export type Story = {
+  __typename: "Story",
+  id: string,
+  type: string,
+  text?: string | null,
+  image?: string | null,
+  user?: User | null,
+  createdAt: string,
+  updatedAt: string,
+  userStoriesId?: string | null,
 };
 
 export type UpdateUserInput = {
@@ -191,6 +210,36 @@ export type DeleteLikeInput = {
   id: string,
 };
 
+export type CreateStoryInput = {
+  id?: string | null,
+  type: string,
+  text?: string | null,
+  image?: string | null,
+  userStoriesId?: string | null,
+};
+
+export type ModelStoryConditionInput = {
+  type?: ModelStringInput | null,
+  text?: ModelStringInput | null,
+  image?: ModelStringInput | null,
+  and?: Array< ModelStoryConditionInput | null > | null,
+  or?: Array< ModelStoryConditionInput | null > | null,
+  not?: ModelStoryConditionInput | null,
+  userStoriesId?: ModelIDInput | null,
+};
+
+export type UpdateStoryInput = {
+  id: string,
+  type?: string | null,
+  text?: string | null,
+  image?: string | null,
+  userStoriesId?: string | null,
+};
+
+export type DeleteStoryInput = {
+  id: string,
+};
+
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
   username?: ModelStringInput | null,
@@ -226,6 +275,17 @@ export type ModelLikeFilterInput = {
   not?: ModelLikeFilterInput | null,
   userLikesId?: ModelIDInput | null,
   tweetLikesId?: ModelIDInput | null,
+};
+
+export type ModelStoryFilterInput = {
+  id?: ModelIDInput | null,
+  type?: ModelStringInput | null,
+  text?: ModelStringInput | null,
+  image?: ModelStringInput | null,
+  and?: Array< ModelStoryFilterInput | null > | null,
+  or?: Array< ModelStoryFilterInput | null > | null,
+  not?: ModelStoryFilterInput | null,
+  userStoriesId?: ModelIDInput | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -264,6 +324,20 @@ export type CreateUserMutation = {
         updatedAt: string,
         userLikesId?: string | null,
         tweetLikesId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    stories?:  {
+      __typename: "ModelStoryConnection",
+      items:  Array< {
+        __typename: "Story",
+        id: string,
+        type: string,
+        text?: string | null,
+        image?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        userStoriesId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -311,6 +385,20 @@ export type UpdateUserMutation = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    stories?:  {
+      __typename: "ModelStoryConnection",
+      items:  Array< {
+        __typename: "Story",
+        id: string,
+        type: string,
+        text?: string | null,
+        image?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        userStoriesId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -355,6 +443,20 @@ export type DeleteUserMutation = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    stories?:  {
+      __typename: "ModelStoryConnection",
+      items:  Array< {
+        __typename: "Story",
+        id: string,
+        type: string,
+        text?: string | null,
+        image?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        userStoriesId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -385,6 +487,10 @@ export type CreateTweetMutation = {
       } | null,
       likes?:  {
         __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
@@ -435,6 +541,10 @@ export type UpdateTweetMutation = {
         __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -483,6 +593,10 @@ export type DeleteTweetMutation = {
         __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -526,6 +640,10 @@ export type CreateLikeMutation = {
       } | null,
       likes?:  {
         __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
@@ -586,6 +704,10 @@ export type UpdateLikeMutation = {
         __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -644,6 +766,10 @@ export type DeleteLikeMutation = {
         __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -675,6 +801,126 @@ export type DeleteLikeMutation = {
     updatedAt: string,
     userLikesId?: string | null,
     tweetLikesId?: string | null,
+  } | null,
+};
+
+export type CreateStoryMutationVariables = {
+  input: CreateStoryInput,
+  condition?: ModelStoryConditionInput | null,
+};
+
+export type CreateStoryMutation = {
+  createStory?:  {
+    __typename: "Story",
+    id: string,
+    type: string,
+    text?: string | null,
+    image?: string | null,
+    user?:  {
+      __typename: "User",
+      id: string,
+      username: string,
+      name: string,
+      email: string,
+      image?: string | null,
+      tweets?:  {
+        __typename: "ModelTweetConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userStoriesId?: string | null,
+  } | null,
+};
+
+export type UpdateStoryMutationVariables = {
+  input: UpdateStoryInput,
+  condition?: ModelStoryConditionInput | null,
+};
+
+export type UpdateStoryMutation = {
+  updateStory?:  {
+    __typename: "Story",
+    id: string,
+    type: string,
+    text?: string | null,
+    image?: string | null,
+    user?:  {
+      __typename: "User",
+      id: string,
+      username: string,
+      name: string,
+      email: string,
+      image?: string | null,
+      tweets?:  {
+        __typename: "ModelTweetConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userStoriesId?: string | null,
+  } | null,
+};
+
+export type DeleteStoryMutationVariables = {
+  input: DeleteStoryInput,
+  condition?: ModelStoryConditionInput | null,
+};
+
+export type DeleteStoryMutation = {
+  deleteStory?:  {
+    __typename: "Story",
+    id: string,
+    type: string,
+    text?: string | null,
+    image?: string | null,
+    user?:  {
+      __typename: "User",
+      id: string,
+      username: string,
+      name: string,
+      email: string,
+      image?: string | null,
+      tweets?:  {
+        __typename: "ModelTweetConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userStoriesId?: string | null,
   } | null,
 };
 
@@ -716,6 +962,20 @@ export type GetUserQuery = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    stories?:  {
+      __typename: "ModelStoryConnection",
+      items:  Array< {
+        __typename: "Story",
+        id: string,
+        type: string,
+        text?: string | null,
+        image?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        userStoriesId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -743,6 +1003,10 @@ export type ListUsersQuery = {
       } | null,
       likes?:  {
         __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
@@ -776,6 +1040,10 @@ export type GetTweetQuery = {
       } | null,
       likes?:  {
         __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
@@ -859,6 +1127,10 @@ export type GetLikeQuery = {
         __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -934,6 +1206,78 @@ export type ListLikesQuery = {
   } | null,
 };
 
+export type GetStoryQueryVariables = {
+  id: string,
+};
+
+export type GetStoryQuery = {
+  getStory?:  {
+    __typename: "Story",
+    id: string,
+    type: string,
+    text?: string | null,
+    image?: string | null,
+    user?:  {
+      __typename: "User",
+      id: string,
+      username: string,
+      name: string,
+      email: string,
+      image?: string | null,
+      tweets?:  {
+        __typename: "ModelTweetConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userStoriesId?: string | null,
+  } | null,
+};
+
+export type ListStoriesQueryVariables = {
+  filter?: ModelStoryFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListStoriesQuery = {
+  listStories?:  {
+    __typename: "ModelStoryConnection",
+    items:  Array< {
+      __typename: "Story",
+      id: string,
+      type: string,
+      text?: string | null,
+      image?: string | null,
+      user?:  {
+        __typename: "User",
+        id: string,
+        username: string,
+        name: string,
+        email: string,
+        image?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      userStoriesId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type OnCreateUserSubscription = {
   onCreateUser?:  {
     __typename: "User",
@@ -965,6 +1309,20 @@ export type OnCreateUserSubscription = {
         updatedAt: string,
         userLikesId?: string | null,
         tweetLikesId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    stories?:  {
+      __typename: "ModelStoryConnection",
+      items:  Array< {
+        __typename: "Story",
+        id: string,
+        type: string,
+        text?: string | null,
+        image?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        userStoriesId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1007,6 +1365,20 @@ export type OnUpdateUserSubscription = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    stories?:  {
+      __typename: "ModelStoryConnection",
+      items:  Array< {
+        __typename: "Story",
+        id: string,
+        type: string,
+        text?: string | null,
+        image?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        userStoriesId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1046,6 +1418,20 @@ export type OnDeleteUserSubscription = {
       } | null >,
       nextToken?: string | null,
     } | null,
+    stories?:  {
+      __typename: "ModelStoryConnection",
+      items:  Array< {
+        __typename: "Story",
+        id: string,
+        type: string,
+        text?: string | null,
+        image?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        userStoriesId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1071,6 +1457,10 @@ export type OnCreateTweetSubscription = {
       } | null,
       likes?:  {
         __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
@@ -1116,6 +1506,10 @@ export type OnUpdateTweetSubscription = {
         __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1159,6 +1553,10 @@ export type OnDeleteTweetSubscription = {
         __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1197,6 +1595,10 @@ export type OnCreateLikeSubscription = {
       } | null,
       likes?:  {
         __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
@@ -1252,6 +1654,10 @@ export type OnUpdateLikeSubscription = {
         __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -1305,6 +1711,10 @@ export type OnDeleteLikeSubscription = {
         __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     },
@@ -1336,5 +1746,110 @@ export type OnDeleteLikeSubscription = {
     updatedAt: string,
     userLikesId?: string | null,
     tweetLikesId?: string | null,
+  } | null,
+};
+
+export type OnCreateStorySubscription = {
+  onCreateStory?:  {
+    __typename: "Story",
+    id: string,
+    type: string,
+    text?: string | null,
+    image?: string | null,
+    user?:  {
+      __typename: "User",
+      id: string,
+      username: string,
+      name: string,
+      email: string,
+      image?: string | null,
+      tweets?:  {
+        __typename: "ModelTweetConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userStoriesId?: string | null,
+  } | null,
+};
+
+export type OnUpdateStorySubscription = {
+  onUpdateStory?:  {
+    __typename: "Story",
+    id: string,
+    type: string,
+    text?: string | null,
+    image?: string | null,
+    user?:  {
+      __typename: "User",
+      id: string,
+      username: string,
+      name: string,
+      email: string,
+      image?: string | null,
+      tweets?:  {
+        __typename: "ModelTweetConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userStoriesId?: string | null,
+  } | null,
+};
+
+export type OnDeleteStorySubscription = {
+  onDeleteStory?:  {
+    __typename: "Story",
+    id: string,
+    type: string,
+    text?: string | null,
+    image?: string | null,
+    user?:  {
+      __typename: "User",
+      id: string,
+      username: string,
+      name: string,
+      email: string,
+      image?: string | null,
+      tweets?:  {
+        __typename: "ModelTweetConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      stories?:  {
+        __typename: "ModelStoryConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userStoriesId?: string | null,
   } | null,
 };

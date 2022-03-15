@@ -40,7 +40,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-twitterclone-dev-210544-deployment/amplify-cfn-templates/auth/twitterclone39279931-cloudformation-template.json",
         "logicalId": "authtwitterclone39279931"
       },
-      "lastPushTimeStamp": "2022-03-06T08:15:12.523Z",
+      "lastPushTimeStamp": "2022-03-15T07:17:15.106Z",
       "output": {
         "UserPoolId": "ap-northeast-1_B7LpV50Vc",
         "AppClientIDWeb": "4cqu45lp1uermtv3rhtofc4s8k",
@@ -77,8 +77,8 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-twitterclone-dev-210544-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apitwitterclone"
       },
-      "lastPushTimeStamp": "2022-03-06T08:15:17.761Z",
-      "lastPushDirHash": "mvY9nRLpbnXQLcXAyecFuM6XOG8="
+      "lastPushTimeStamp": "2022-03-15T07:17:21.156Z",
+      "lastPushDirHash": "rwrxoGy11Won2FrZBTssJOLbX+8="
     }
   },
   "storage": {
@@ -86,7 +86,7 @@
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
-      "lastPushTimeStamp": "2022-03-06T08:15:17.761Z",
+      "lastPushTimeStamp": "2022-03-15T07:17:15.109Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-twitterclone-dev-210544-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "logicalId": "storageTwitterCloneLast"
