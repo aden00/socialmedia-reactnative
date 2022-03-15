@@ -13,10 +13,10 @@ const UserFleetPreview = (props: UserFleetPreviewProps) => {
   const navigation = useNavigation();
 
   const {
-    user: { username, image },
+    user: { username, id, image },
   } = props;
   const onPress = () => {
-    navigation.navigate("Story");
+    navigation.navigate("Story", { userId: id });
   };
   return (
     <TouchableOpacity onPress={onPress}>

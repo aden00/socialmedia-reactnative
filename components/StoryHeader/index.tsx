@@ -1,12 +1,23 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import ProfilePicture from "../ProfilePicture";
-import { UserType } from "../../types";
+import { StoryType, UserType } from "../../types";
+import moment from "moment";
+import { Entypo } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 export type StoryHeaderProps = {
   user: UserType;
+
+  story: StoryType;
 };
 const StoryHeader = (props: StoryHeaderProps) => {
-  const { user } = props;
+  const navigation = useNavigation();
+  const onCrossPress = () => {
+    navigation.goBack();
+  };
+  const { user, story } = props;
+  // console.log(user);
+  // console.log(story);
   return (
     <View style={styles.userHeaderContainer}>
       <ProfilePicture image={user.image} size={55} />
@@ -14,9 +25,16 @@ const StoryHeader = (props: StoryHeaderProps) => {
         <Text style={styles.name}>{user.name}</Text>
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.username}>@{user.username}</Text>
-          <Text style={styles.time}>2 days ago</Text>
+          <Text style={styles.time}>{moment(story.createdAt).fromNow()}</Text>
         </View>
       </View>
+      <TouchableOpacity
+        activeOpacity={0.1}
+        style={{ position: "absolute", right: 20 }}
+        onPress={onCrossPress}
+      >
+        <Entypo name="cross" size={30} color="white" />
+      </TouchableOpacity>
     </View>
   );
 };
