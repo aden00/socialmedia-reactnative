@@ -40,6 +40,7 @@ import NewTweetScreen from "../screens/NewTweetScreen";
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import { getUser } from "../src/graphql/queries";
 import StoryScreen from "../screens/StoryScreen";
+import NewStoryScreen from "../screens/NewStoryScreen";
 export default function Navigation({
   colorScheme,
 }: {
@@ -72,6 +73,11 @@ function RootNavigator() {
       <Stack.Screen
         name="NewTweet"
         component={NewTweetScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NewStory"
+        component={NewStoryScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen

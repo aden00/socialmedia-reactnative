@@ -31,10 +31,6 @@ const StoryView = (props: StoryViewProps) => {
   return (
     <View style={styles.container}>
       {/* {renderElement()} */}
-      {/* {story.type == "IMAGE" && (
-        <Image source={{ uri: story.image }} style={styles.image} />
-      )}
-      {story.type == "TEXT" && <Text style={styles.text}>{story.text}</Text>} */}
       {story.image && (
         <Image source={{ uri: story.image }} style={styles.image} />
       )}

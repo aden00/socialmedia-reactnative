@@ -22,6 +22,7 @@ export type RootStackParamList = {
   NotFound: undefined;
   NewTweet: undefined;
   Story: undefined;
+  NewStory: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
